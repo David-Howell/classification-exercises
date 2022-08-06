@@ -65,7 +65,7 @@ def get_telco_data():
         # read the SQL query into a dataframe
         df = gdb('telco_churn', 
                 '''
-                        
+                SELECT * FROM customer_contracts        
                 ''')
         
         # Write that dataframe to disk for later. Called "caching" the data for later.

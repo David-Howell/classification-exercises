@@ -20,7 +20,7 @@ def get_titanic_data():
         ''')
         
         # Write that dataframe to disk for later. Called "caching" the data for later.
-        df.to_csv(filename)
+        df.to_csv(filename, index=False)
 
         # Return the dataframe to the calling code
         return df  
@@ -44,7 +44,7 @@ def get_iris_data():
                 ''')
         
         # Write that dataframe to disk for later. Called "caching" the data for later.
-        df.to_csv(filename)
+        df.to_csv(filename, index=False)
 
         # Return the dataframe to the calling code
         return df  
@@ -78,7 +78,7 @@ def get_telco_data():
                 ''')
         
         # Write that dataframe to disk for later. Called "caching" the data for later.
-        df.to_csv(filename)
+        df.to_csv(filename, index=False)
 
         # Return the dataframe to the calling code
         return df  

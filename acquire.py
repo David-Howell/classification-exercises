@@ -2,11 +2,6 @@ from env import gdb
 import os
 import pandas as pd
 
-def new_titanic_data():
-    gdb('titanic_db',
-        '''
-        SELECT * FROM passengers
-        ''')
 
 def get_titanic_data():
     filename = "titanic.csv"
@@ -19,7 +14,10 @@ def get_titanic_data():
     # and write it as csv locally for future use
     else:
         # read the SQL query into a dataframe
-        df = new_titanic_data()
+        df = gdb('titanic_db',
+        '''
+        SELECT * FROM passengers
+        ''')
         
         # Write that dataframe to disk for later. Called "caching" the data for later.
         df.to_csv(filename)

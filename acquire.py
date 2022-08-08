@@ -65,7 +65,18 @@ def get_telco_data():
         # read the SQL query into a dataframe
         df = gdb('telco_churn', 
                 '''
-                SELECT * FROM customer_contracts        
+                SELECT c.customer_id, c.gender, c.senior_citizen, c.partner, c.dependents, c.tenure, c.phone_service, c.multiple_lines,
+			c.internet_service_type_id, ist.internet_service_type, c.online_security, c.online_backup, c.device_protection,
+            c.tech_support, c.streaming_tv, c.streaming_movies, c.contract_type_id, ct.contract_type, c.paperless_billing,
+            c.payment_type_id, pt.payment_type, c.monthly_charges, c.total_charges, c.churn
+        
+        FROM customers c
+			JOIN internet_service_types ist
+				ON c.internet_service_type_id = ist.internet_service_type_id
+			JOIN contract_types ct
+				ON c.contract_type_id = ct.contract_type_id
+			JOIN payment_types pt
+				ON c.payment_type_id = pt.payment_type_id;      
                 ''')
         
         # Write that dataframe to disk for later. Called "caching" the data for later.
@@ -73,3 +84,5 @@ def get_telco_data():
 
         # Return the dataframe to the calling code
         return df  
+
+

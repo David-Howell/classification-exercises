@@ -84,3 +84,13 @@ def get_telco_data():
         return df  
 
 
+def read_googlesheet(sheet_url):
+    '''
+    This function takes in a `sheet_url` from a shared google sheet ;dtype= str
+    and returns the sheet as a pd.DataFrame
+    '''
+#     First it uses .replace to change the google sheet url into a .csv export format
+    csv_export_url = sheet_url.replace('/edit#gid=', '/export?format=csv&gid=')
+    
+#     Then it uses pd.read_csv to read it into a DataFrame
+    return pd.read_csv(csv_export_url)

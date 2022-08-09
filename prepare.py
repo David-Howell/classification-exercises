@@ -10,7 +10,6 @@ def prep_iris():
     dummy_df = pd.get_dummies(df_iris.species, drop_first=True)
     df = pd.concat([df_iris, dummy_df], axis=1)
     print(df.info())
-    print(df.head())
     return df
 
 def prep_titanic():
@@ -22,7 +21,7 @@ def prep_titanic():
     
     df.drop(columns= ['sex', 'embark_town'], inplace=True)
     print(df.info())
-    print(df.head())
+
     return df
 
 
@@ -47,5 +46,31 @@ def prep_telco():
 
     df = df.drop(columns=encode)
     print(df.info())
-    print(df.head())
     return df
+
+    
+    
+    # train, test = train_test_split(df, test_size=.2, 
+    #                            random_state=123, stratify=df.survived)
+
+    # train, validate = train_test_split(train, test_size=.25, 
+    #              random_state=123, stratify=train.survived)
+
+def split_data(df, strat_by):
+    '''
+    Takes in a dataframe and a string type field to stratify by
+    return train, validate, test subset dataframes
+    '''
+    from sklearn.model_selection import train_test_split
+    train, test = train_test_split(df, test_size=.2, 
+                               random_state=123, stratify=df[strat_by])
+    train, validate = train_test_split(train, test_size=.25, 
+                 random_state=123, stratify=train[strat_by])
+    print(f'Prepared df: {df.shape}')
+    print()
+    print(f'Train: {train.shape}')
+    print(f'Validate: {validate.shape}')
+    print(f'Test: {test.shape}')
+
+
+    return train, validate, test

@@ -57,16 +57,19 @@ def prep_telco():
     # train, validate = train_test_split(train, test_size=.25, 
     #              random_state=123, stratify=train.survived)
 
-def split_data(df, strat_by):
+def split_data(df, strat_by, rand_st=123):
     '''
-    Takes in a dataframe and a string type field to stratify by
-    return train, validate, test subset dataframes
+    Takes in: a pd.DataFrame()
+          and a column to stratify by  ;dtype(str)
+          and a random state           ;if no random state is specifed defaults to [123]
+          
+      return: train, validate, test    ;subset dataframes
     '''
     from sklearn.model_selection import train_test_split
     train, test = train_test_split(df, test_size=.2, 
-                               random_state=123, stratify=df[strat_by])
+                               random_state=rand_st, stratify=df[strat_by])
     train, validate = train_test_split(train, test_size=.25, 
-                 random_state=123, stratify=train[strat_by])
+                 random_state=rand_st, stratify=train[strat_by])
     print(f'Prepared df: {df.shape}')
     print()
     print(f'Train: {train.shape}')

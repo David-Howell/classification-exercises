@@ -1,23 +1,30 @@
-def confusion():
+def confusion(TN, TP, FN, FP):
     acc = (TP+TN)/(TP+TN+FP+FN)
     pre = (TP/(TP+FP))
     NPV = (TN/(TN+FN))
     rec = (TP/(TP+FN))
-    spec = (TN/(TN+FP))
+    spe = (TN/(TN+FP))
+    f1s = stats.hmean([(TP/(TP+FP)),(TP/(TP+FN))])
     print(
     f'''
-    _______________________________________________
+    _______________________________________________________________________________________
+    
     True Positive = {TP} ---- False Positive = {FP}
     True Negative = {TN} ---- False Negative = {FN}
     
-    Out of {TP+FN+FP+FN} predictions
+    Out of {TP+FN+FP+TN} predictions -- Correct predictions = {TP+TN} (True Pos + True Neg) 
     
-        Accuracy = {acc:.2%}
-       Precision = {pre:.2%}
-             NPV = {NPV:.2%}
-          Recall = {rec:.2%}
-     Specificity = {spec:.2%}
-    _______________________________________________
+    REAL POSITIVE = (TP + FN) = {TP+FN} ---- PREDICTED POSITIVE = (TP + FP) = {TP+FP}
+    
+    REAL NEGATIVE = (TN + FP) = {TN+FP} ---- PREDICTED NEGATIVE = (TN + FN) = {TN+FN}
+     
+        Accuracy = {acc:.2%} -->> Correct Predictions / Total Predictions
+       Precision = {pre:.2%} -->> True Positive / Predicted Positive
+             NPV = {NPV:.2%} -->> True Negative / Predicted Negative
+          Recall = {rec:.2%} -->> True Positive / Real Positive
+     Specificity = {spe:.2%} -->> True Negative / Real Negative
+        f1-score = {f1s:.2%} -->> Harmonic Mean of Precision and Recall
+    _______________________________________________________________________________________
     '''
     )
 

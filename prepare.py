@@ -35,11 +35,11 @@ def prep_telco():
 
     df['null_charges'] = pd.to_numeric(df['total_charges'], errors='coerce').isnull()
 
-    df['total_charges'][df['null_charges'].loc[True] = df['monthly_charges'][df['null_charges'].loc[True]]
+    df['total_charges'][df['null_charges'] == True] = df['monthly_charges'][df['null_charges'] == True]
 
     df.total_charges = df.total_charges.astype(float)
 
-    df.drop(columns= 'null_charges', 'gender', 'multiple_lines', inplace=True)
+    df.drop(columns= ['null_charges', 'gender', 'multiple_lines', 'customer_id'], inplace=True)
 
     dummy_df = pd.get_dummies(df[encode], drop_first=True)
 

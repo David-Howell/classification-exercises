@@ -7,7 +7,7 @@ def prep_iris():
     df = acquire.get_iris_data()
     df.drop(columns=['measurement_id', 'species_id', 'species_id.1'], inplace=True)
     df.rename(columns = {'species_name':'species'}, inplace=True)
-    dummy_df = pd.get_dummies(df_iris.species, drop_first=True)
+    dummy_df = pd.get_dummies(df.species, drop_first=True)
     df = pd.concat([df, dummy_df], axis=1)
     print(df.info())
     return df

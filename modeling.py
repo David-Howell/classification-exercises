@@ -1,3 +1,5 @@
+
+
 def confusion(TN, TP, FN, FP):
     acc = (TP+TN)/(TP+TN+FP+FN)
     pre = (TP/(TP+FP))
@@ -12,7 +14,8 @@ def confusion(TN, TP, FN, FP):
     True Positive = {TP} ---- False Positive = {FP}
     True Negative = {TN} ---- False Negative = {FN}
     
-    Out of {TP+FN+FP+TN} predictions -- Correct predictions = {TP+TN} (True Pos + True Neg) 
+    Correct predictions = {TP+TN} (True Pos + True Neg)
+      Total predictions = {TP+FN+FP+TN} predictions
     
     REAL POSITIVE = (TP + FN) = {TP+FN} ---- PREDICTED POSITIVE = (TP + FP) = {TP+FP}
     
